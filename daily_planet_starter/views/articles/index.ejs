@@ -5,5 +5,34 @@
 <% articles.forEach(function(article, idx) { %>
   <div class="well">
     <a href="/articles/<%= idx %>"><h2><%= article.title %></h2></a>
+    <a class="delete-link btn btn-primary" href="/articles/<%= idx %>">Delete This Shiznit</a>
+    <a class="edit-link btn btn-primary" href="/articles/<%= idx %>/edit">Edit Yo Biness</a>
   </div>
 <% }); %>
+
+<script
+  src="https://code.jquery.com/jquery-3.2.1.min.js"
+  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+  crossorigin="anonymous"></script>
+<script>
+  $('.delete-link').on('click', function(e) {
+    e.preventDefault();
+    var deleteUrl = $(this).attr('href');
+    $.ajax({
+      method: 'DELETE',
+      url: deleteUrl
+    }).done(function(data) {
+      // get data returned from the DELETE route
+      console.log(data);
+    });
+  });
+  // $('.edit-link').on('click', function(e) {
+  //   e.preventDefault();
+  //   var url = $(this).attr('href');
+  //   var data =
+  //   $.ajax({
+  //     method: "GET",
+  //     url: url
+  //   });
+  // });
+</script>

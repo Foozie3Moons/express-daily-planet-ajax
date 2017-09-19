@@ -1,0 +1,32 @@
+<h1><%= article.title %></h1>
+
+<p>Use this form to update this artilce</p>
+
+<form class="well" action="/articles/<%= id %>/edit" id="put-form">
+    <label for="title">Title</label>
+    <input id="title" class="form-control" type="textarea" name="title" value="<%= article.title %>">
+    <br />
+    <label for="body">Body</label>
+    <textarea type="textarea" class="form-control" cols="40" rows="5" name="body"><%= article.body %></textarea>
+    <br />
+    <input type="button" value="Update Yo Biness">
+  </form>
+<script
+  src="https://code.jquery.com/jquery-3.2.1.min.js"
+  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+  crossorigin="anonymous"></script>
+<script>
+  $('[type="button"]').on('click', function(e) {
+    e.preventDefault();
+    var updateUrl = $(this).parent().attr('action');
+    var articleData = $(this).parent().serialize();
+    $.ajax({
+      method: 'PUT',
+      url: updateUrl,
+      data: articleData
+    }).done(function(data) {
+      // get data returned from the PUT route
+      console.log(data);
+    });
+  });
+</script>
